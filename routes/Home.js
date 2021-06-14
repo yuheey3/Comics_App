@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 var app = require("../app.js");
 const request = require('request');
+const bcrypt = require("bcryptjs");
 
 var pageNum = "1";
 var string = "";
@@ -19,13 +20,29 @@ router.get("/", (req, res) => {
 
 });
 
+
 //when search button clicked
 router.post("/search", function (req, res) {
-
+    var errors = "";
+    String.prototype.isNumber = function () { return /^\d+$/.test(this); }
+   
     pageNum = (parseInt(req.body.userInput)).toString();
-
-    console.log(pageNum);
-    const url = `https://xkcd.com/${pageNum}/info.0.json`
+    if (!pageNum.isNumber()) {
+        pageNum = 1;
+        console.log(errors);
+        res.render("Home/404", {
+            msgerror: "Please enter the number"
+    })
+}
+// number should be 1 to 2475
+if (1 > parseInt(pageNum)|| parseInt(pageNum) > 2475) {
+    pageNum = 1;
+    console.log(errors);
+    res.render("Home/404", {
+        msgerror: "Please enter the number between 1 and 2475"
+})
+}
+    var url = `https://xkcd.com/${pageNum}/info.0.json`;
 
     console.log(url);
 
@@ -33,7 +50,7 @@ router.post("/search", function (req, res) {
         const data = JSON.parse(body);
         console.log(data);
 
-        var mystring = "this,is,a,test"
+
         string = (data.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, '');
 
         res.render("Home/home", {
@@ -42,7 +59,6 @@ router.post("/search", function (req, res) {
             , alt: data.alt, day: data.day, transcript: string
         });
     })
-
 
 });
 
