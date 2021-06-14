@@ -22,15 +22,7 @@ app.use("/", (req, res) => {
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-
-//const address = process.argv[2]
 const url = `https://xkcd.com/1/info.0.json`
-//const url = `http://api.openweathermap.org/data/2.5/weather?q=${address}&units=metric&appid=${process.env.API_KEY}`
-
-// if (!address) {
-//   return console.log("Please enter the name of the city")
-// }
-var month = "";
 
 request(url, (error, response, body) => {
     const data = JSON.parse(body);
@@ -42,12 +34,8 @@ request(url, (error, response, body) => {
     app.img = data.img;
     app.title = data.title;
     app.day = data.day
-    //var s = "boy\rfdfdf\rfdfdfd\rfdfdssss";
-   // var html = '<h4>transcript here</h4>';
     app.transcript = data.transcript;
 
-    
-   // console.log(JSON.stringify(app.transcript));
 })
 
 
