@@ -5,6 +5,7 @@ var s = "s";
 
 const request = require('request');
 
+//global.document = new JSDOM(home.handlebars).window.document;
 
 var month2 = "";
 var num2 = "";
@@ -17,18 +18,35 @@ var day2 = "";
 var pageNum = "1";
 
 
-
-
-const url = `https://xkcd.com/info.0.json`
+var string = "";
+const url = `https://xkcd.com/info.0.json`;
 
 router.get("/", (req, res) => {
+    let jsdom = require('jsdom').JSDOM,
+ 
+// some hard coded html
+html = `\t\thhhh\n\dfffdf
+yyy\thh`;
+ 
+// get the dom by calling the jsdom constructor, and giving it the html
+dom = new jsdom(html),
+ 
+// get the window object @ dom.window
+window = dom.window,
+ 
 
+
+//     const dom = new JSDOM(res.body);
+//   console.log(dom.window.document.transcript.innerHTML = 'First line\nSecond line\nThird line');
+
+string = (req.app.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, ''); 
     res.render("Home/home", {
         title: req.app.title, img: req.app.img, month: req.app.month,
         num: req.app.num, year: req.app.year
-        , alt: req.app.alt, day: req.app.day
+        , alt: req.app.alt, day: req.app.day, transcript: string
     });
 
+ 
 
 
 });
@@ -47,12 +65,16 @@ router.post("/search", function (req, res) {
     request(url, function (error, response, body) {
         const data = JSON.parse(body);
         console.log(data);
+       
+        
+        var mystring = "this,is,a,test"
+        string = (data.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, ''); 
 
 
         res.render("Home/home", {
             title: data.title, img: data.img, month: data.month,
             num: data.num, year: data.year
-            , alt: data.alt, day: data.day
+            , alt: data.alt, day: data.day, transcript:string
         });
     })
 
@@ -75,10 +97,12 @@ router.post("/next", function (req, res) {
         console.log(data);
 
 
+        string = (data.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, ''); 
+
         res.render("Home/home", {
             title: data.title, img: data.img, month: data.month,
             num: data.num, year: data.year
-            , alt: data.alt, day: data.day
+            , alt: data.alt, day: data.day, transcript: string
         });
     })
 
@@ -100,11 +124,13 @@ router.post("/back", function (req, res) {
         const data = JSON.parse(body);
         console.log(data);
 
+   
+        string = (data.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, ''); 
 
         res.render("Home/home", {
             title: data.title, img: data.img, month: data.month,
             num: data.num, year: data.year
-            , alt: data.alt, day: data.day
+            , alt: data.alt, day: data.day, transcript: string
         });
     })
 
@@ -127,11 +153,13 @@ router.post("/random", function (req, res) {
         const data = JSON.parse(body);
         console.log(data);
 
+        
+        string = (data.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, ''); 
 
         res.render("Home/home", {
             title: data.title, img: data.img, month: data.month,
             num: data.num, year: data.year
-            , alt: data.alt, day: data.day
+            , alt: data.alt, day: data.day, transcript: string
         });
     })
 

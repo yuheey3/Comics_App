@@ -7,7 +7,7 @@ body {
    
     color:white;
 }
-h1,h2,h3,h4{
+h1,h2,h3,h4,h5,h6{
 
     color:white;
  
@@ -25,4 +25,9 @@ h1,h2,h3,h4{
 
 #randomBtn{
     margin-left: 100px;
+}
+
+#transcript{
+margin-left: 1000px;
+background-color: lightpink;
 }

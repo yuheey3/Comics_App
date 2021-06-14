@@ -12,9 +12,15 @@
     <h2>{{year}}/{{month}}/{{day}}</h2><br>
 
     <img src={{img}} alt="comicImg">
-    <br><br><br>
-    <h3>{{alt}}</h3>
-    <br>   <br>   <br>
+    <br><br>
+
+
+<div class="container p-3 my-3 border">
+  <h2>{{alt}}</h2><br>
+  <h5>{{transcript}}</h5>
+</div>
+    <br><br>
+
 
     <form method="POST" action="/back" class="ele_inline">
         <button class="btn btn-primary btn-rounded">Back</button>
@@ -23,7 +29,7 @@
     <form method="POST" action="/next" class="ele_inline">
         <button class="btn btn-success btn-rounded">Next</button>
     </form>
-        <form method="POST" action="/random" class="ele_inline" id="randomBtn">
+    <form method="POST" action="/random" class="ele_inline" id="randomBtn">
         <button class="btn btn-danger btn-rounded">Random</button>
     </form>
 </div>
