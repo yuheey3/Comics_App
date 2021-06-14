@@ -22,7 +22,7 @@ app.use("/", (req, res) => {
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-const url = `https://xkcd.com/1/info.0.json`
+const url = `https://xkcd.com/info.0.json`
 
 request(url, (error, response, body) => {
     const data = JSON.parse(body);
@@ -35,6 +35,7 @@ request(url, (error, response, body) => {
     app.title = data.title;
     app.day = data.day
     app.transcript = data.transcript;
+    app.lastPage = data.num
 
 })
 

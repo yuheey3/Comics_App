@@ -6,11 +6,12 @@ const bcrypt = require("bcryptjs");
 
 var pageNum = "1";
 var string = "";
-
+var lastPage = "";
 const url = `https://xkcd.com/info.0.json`;
 
 router.get("/", (req, res) => {
-
+    lastPage = req.app.lastPage;
+    pageNum = req.app.lastPage;
     string = (req.app.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, '');
     res.render("Home/home", {
         title: req.app.title, img: req.app.img, month: req.app.month,
@@ -25,21 +26,29 @@ router.get("/", (req, res) => {
 router.post("/search", function (req, res) {
     var errors = "";
     String.prototype.isNumber = function () { return /^\d+$/.test(this); }
-   
+    var temp = pageNum;
     pageNum = (parseInt(req.body.userInput)).toString();
     if (!pageNum.isNumber()) {
-        pageNum = 1;
+        pageNum = temp;
         console.log(errors);
         res.render("Home/404", {
             msgerror: "Please enter the number"
     })
 }
-// number should be 1 to 2475
-if (1 > parseInt(pageNum)|| parseInt(pageNum) > 2475) {
+// number should be more then 0
+if (1 > parseInt(pageNum)) {
     pageNum = 1;
     console.log(errors);
     res.render("Home/404", {
-        msgerror: "Please enter the number between 1 and 2475"
+        msgerror: "Please enter the number more then 0"
+})
+}
+//number should be less than last page
+if (parseInt(pageNum) > parseInt(lastPage)) {
+    pageNum = temp;
+    console.log(errors);
+    res.render("Home/404", {
+        msgerror: `Currently last page is ${lastPage}`
 })
 }
     var url = `https://xkcd.com/${pageNum}/info.0.json`;
@@ -65,10 +74,10 @@ if (1 > parseInt(pageNum)|| parseInt(pageNum) > 2475) {
 
 //when next button clicked
 router.post("/next", function (req, res) {
-
+console.log(lastPage);
     pageNum = (parseInt(pageNum) + 1).toString();
-    if(pageNum == 2476){
-        pageNum = 1;
+    if(parseInt(pageNum) > parseInt(lastPage)){
+        pageNum = parseInt(lastPage);
         
         res.render("Home/404", {
             msgerror: "You are in the last page"
@@ -133,7 +142,7 @@ if(pageNum == 0){
 router.post("/backMain", function (req, res) {
 
 
-    const url = `https://xkcd.com/1/info.0.json`
+    const url = `https://xkcd.com/${pageNum}/info.0.json`
 
     console.log(url);
 
@@ -157,7 +166,7 @@ router.post("/backMain", function (req, res) {
 
 //when random button clicked
 router.post("/random", function (req, res) {
-    pageNum = (randomInteger(1, 2475)).toString();
+    pageNum = (randomInteger(1, parseInt(lastPage))).toString();
 
     console.log(pageNum);
     const url = `https://xkcd.com/${pageNum}/info.0.json`
@@ -189,7 +198,6 @@ function randomInteger(min, max) {
     }
     return num;
 }
-
 
 module.exports = router;
 
