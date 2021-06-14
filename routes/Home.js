@@ -7,12 +7,12 @@ const request = require('request');
 
 
 var month2 = "";
-var num2= "";
-var year2= "";
-var alt2= "";
-var img2= "";
-var title2= "";
-var day2= "";
+var num2 = "";
+var year2 = "";
+var alt2 = "";
+var img2 = "";
+var title2 = "";
+var day2 = "";
 
 var pageNum = "1";
 
@@ -33,35 +33,9 @@ router.get("/", (req, res) => {
 
 });
 
-router.post("/search", function(req, res) {
+router.post("/search", function (req, res) {
 
     pageNum = (parseInt(req.body.userInput)).toString();
-    
-        console.log(pageNum);
-        const url = `https://xkcd.com/${pageNum}/info.0.json`
-    
-    
-        console.log(url);
-    
-    
-        request(url, function (error, response, body) {
-            const data = JSON.parse(body);
-            console.log(data);
-    
-            
-            res.render("Home/home", {
-                title: data.title, img: data.img, month: data.month,
-                num: data.num, year: data.year
-                , alt: data.alt, day: data.day
-            });
-        })
-    
-      
-    });
-
-router.post("/next", function(req, res) {
-
-pageNum = (parseInt(pageNum) + 1).toString();
 
     console.log(pageNum);
     const url = `https://xkcd.com/${pageNum}/info.0.json`
@@ -74,7 +48,7 @@ pageNum = (parseInt(pageNum) + 1).toString();
         const data = JSON.parse(body);
         console.log(data);
 
-        
+
         res.render("Home/home", {
             title: data.title, img: data.img, month: data.month,
             num: data.num, year: data.year
@@ -82,34 +56,96 @@ pageNum = (parseInt(pageNum) + 1).toString();
         });
     })
 
-  
+
 });
 
-router.post("/back", function(req, res) {
+router.post("/next", function (req, res) {
+
+    pageNum = (parseInt(pageNum) + 1).toString();
+
+    console.log(pageNum);
+    const url = `https://xkcd.com/${pageNum}/info.0.json`
+
+
+    console.log(url);
+
+
+    request(url, function (error, response, body) {
+        const data = JSON.parse(body);
+        console.log(data);
+
+
+        res.render("Home/home", {
+            title: data.title, img: data.img, month: data.month,
+            num: data.num, year: data.year
+            , alt: data.alt, day: data.day
+        });
+    })
+
+
+});
+
+router.post("/back", function (req, res) {
 
     pageNum = (parseInt(pageNum) - 1).toString();
-    
-        console.log(pageNum);
-        const url = `https://xkcd.com/${pageNum}/info.0.json`
-    
-    
-        console.log(url);
-    
-    
-        request(url, function (error, response, body) {
-            const data = JSON.parse(body);
-            console.log(data);
-    
-            
-            res.render("Home/home", {
-                title: data.title, img: data.img, month: data.month,
-                num: data.num, year: data.year
-                , alt: data.alt, day: data.day
-            });
-        })
-    
-      
-    });
+
+    console.log(pageNum);
+    const url = `https://xkcd.com/${pageNum}/info.0.json`
+
+
+    console.log(url);
+
+
+    request(url, function (error, response, body) {
+        const data = JSON.parse(body);
+        console.log(data);
+
+
+        res.render("Home/home", {
+            title: data.title, img: data.img, month: data.month,
+            num: data.num, year: data.year
+            , alt: data.alt, day: data.day
+        });
+    })
+
+
+});
+
+router.post("/random", function (req, res) {
+    pageNum = (randomInteger(1, 2475)).toString();
+
+    // pageNum = (parseInt(pageNum) - 1).toString();
+
+    console.log(pageNum);
+    const url = `https://xkcd.com/${pageNum}/info.0.json`
+
+
+    console.log(url);
+
+
+    request(url, function (error, response, body) {
+        const data = JSON.parse(body);
+        console.log(data);
+
+
+        res.render("Home/home", {
+            title: data.title, img: data.img, month: data.month,
+            num: data.num, year: data.year
+            , alt: data.alt, day: data.day
+        });
+    })
+
+
+});
+
+function randomInteger(min, max) {
+    var num = 0;
+    num = Math.floor(Math.random() * (max - min + 1)) + min;
+    if (num == 404) {
+        num = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    return num;
+}
 // router.post("/:id", (req, res) => {
 
 
@@ -119,7 +155,7 @@ router.post("/back", function(req, res) {
 //     //     num: req.app.num, year: req.app.year
 //     //     , alt: req.app.alt, day: req.app.day
 //     // });
-  
+
 
 
 
@@ -139,7 +175,7 @@ router.post("/back", function(req, res) {
 //         img2 = data.img;
 //         title2 = data.title;
 //         day2 = data.day
- 
+
 //     })
 // console.log(title2,alt2);
 
