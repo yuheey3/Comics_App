@@ -1,5 +1,6 @@
-document.getElementById("demo").onclick = function() {myFunction()};
+console.log('Client-side code running');
 
-function myFunction() {
-  document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-}
+const button = document.getElementById('myButton');
+button.addEventListener('click', function(e) {
+  console.log('button was clicked');
+});

@@ -1,6 +1,30 @@
 <link rel="stylesheet" href="../css/home.css">
+
+
+<div class="text-center">
+    <form class="form-inline md-form mr-auto mb-4">
+  <input id="userInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-warning btn-rounded btn-sm my-0" onclick="changeText2()" type="submit">Search</button>
+</form>
+
 <h1>{{title}}</h1>
 <h2>{{year}}/{{month}}/{{day}}</h2>
+
 <img src={{img}} alt="Girl in a jacket" width="500" height="600">
+
 <h3>{{alt}}</h3>
-<p>{{num}}</p>
+
+
+   <form method="POST" action="/back" class="ele_inline">
+  <button class="btn btn-primary btn-rounded" >Back</button>
+  </form>
+  <h4 class="ele_inline">{{num}}</h4>
+   <form method="POST" action="/next"class="ele_inline">
+   <button class="btn btn-success btn-rounded" >Next</button>
+  </form>
+
+
+
+
+
+

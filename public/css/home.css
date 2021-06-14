@@ -1,0 +1,18 @@
+body {
+
+    background-color: #302f2f;
+  }
+
+  p{
+   
+    color:white;
+}
+h1,h2,h3,h4{
+
+    color:white;
+ 
+}
+
+.ele_inline {
+    display: inline
+}
