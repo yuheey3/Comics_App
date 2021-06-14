@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
     res.render("Home/home", {
         title: req.app.title, img: req.app.img, month: req.app.month,
         num: req.app.num, year: req.app.year
-        , alt: req.app.alt, day: req.app.day, transcript: req.app.transcript
+        , alt: req.app.alt, day: req.app.day, transcript: string
     });
 
 });
