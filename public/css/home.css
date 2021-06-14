@@ -16,3 +16,13 @@ h1,h2,h3,h4{
 .ele_inline {
     display: inline
 }
+
+#inputForm{
+
+  display:inline-block;
+    
+}
+
+#randomBtn{
+    margin-left: 100px;
+}

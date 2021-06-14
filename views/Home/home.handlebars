@@ -1,30 +1,29 @@
 <link rel="stylesheet" href="../css/home.css">
 
 
-<div class="text-center">
-    <form class="form-inline md-form mr-auto mb-4">
-  <input id="userInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-  <button class="btn btn-outline-warning btn-rounded btn-sm my-0" onclick="changeText2()" type="submit">Search</button>
-</form>
+<div class="text-center"><br><br>
+    <form method="POST" action="/search" class="form-inline md-form mr-auto mb-4" id="inputForm">
+        <input id="userInput" name="userInput" class="form-control mr-sm-2" type="text" placeholder="Search by number"
+            aria-label="Search">
+        <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit">Search</button>
+    </form>
 
-<h1>{{title}}</h1>
-<h2>{{year}}/{{month}}/{{day}}</h2>
+    <h1>{{title}}</h1>
+    <h2>{{year}}/{{month}}/{{day}}</h2><br>
 
-<img src={{img}} alt="Girl in a jacket" width="500" height="600">
+    <img src={{img}} alt="comicImg">
+    <br><br>
+    <h3>{{alt}}</h3>
+    <br>
 
-<h3>{{alt}}</h3>
-
-
-   <form method="POST" action="/back" class="ele_inline">
-  <button class="btn btn-primary btn-rounded" >Back</button>
-  </form>
-  <h4 class="ele_inline">{{num}}</h4>
-   <form method="POST" action="/next"class="ele_inline">
-   <button class="btn btn-success btn-rounded" >Next</button>
-  </form>
-
-
-
-
-
-
+    <form method="POST" action="/back" class="ele_inline">
+        <button class="btn btn-primary btn-rounded">Back</button>
+    </form>&nbsp;&nbsp;
+    <h4 class="ele_inline">{{num}}</h4>&nbsp;&nbsp;
+    <form method="POST" action="/next" class="ele_inline">
+        <button class="btn btn-success btn-rounded">Next</button>
+    </form>
+        <form method="POST" action="/random" class="ele_inline" id="randomBtn">
+        <button class="btn btn-danger btn-rounded">Random</button>
+    </form>
+</div>

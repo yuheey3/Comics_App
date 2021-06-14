@@ -32,10 +32,37 @@ router.get("/", (req, res) => {
 
 
 });
+
+router.post("/search", function(req, res) {
+
+    pageNum = (parseInt(req.body.userInput)).toString();
+    
+        console.log(pageNum);
+        const url = `https://xkcd.com/${pageNum}/info.0.json`
+    
+    
+        console.log(url);
+    
+    
+        request(url, function (error, response, body) {
+            const data = JSON.parse(body);
+            console.log(data);
+    
+            
+            res.render("Home/home", {
+                title: data.title, img: data.img, month: data.month,
+                num: data.num, year: data.year
+                , alt: data.alt, day: data.day
+            });
+        })
+    
+      
+    });
+
 router.post("/next", function(req, res) {
 
 pageNum = (parseInt(pageNum) + 1).toString();
-   // pageNum = (pageNum + 1).toString();
+
     console.log(pageNum);
     const url = `https://xkcd.com/${pageNum}/info.0.json`
 
@@ -47,14 +74,6 @@ pageNum = (parseInt(pageNum) + 1).toString();
         const data = JSON.parse(body);
         console.log(data);
 
-        // app.month = data.month;
-        // app.num = data.num;
-        // app.year = data.year;
-        // app.alt = data.alt;
-        // app.img = data.img;
-        // app.title = data.title;
-        // app.day = data.day
-      
         
         res.render("Home/home", {
             title: data.title, img: data.img, month: data.month,
@@ -65,6 +84,32 @@ pageNum = (parseInt(pageNum) + 1).toString();
 
   
 });
+
+router.post("/back", function(req, res) {
+
+    pageNum = (parseInt(pageNum) - 1).toString();
+    
+        console.log(pageNum);
+        const url = `https://xkcd.com/${pageNum}/info.0.json`
+    
+    
+        console.log(url);
+    
+    
+        request(url, function (error, response, body) {
+            const data = JSON.parse(body);
+            console.log(data);
+    
+            
+            res.render("Home/home", {
+                title: data.title, img: data.img, month: data.month,
+                num: data.num, year: data.year
+                , alt: data.alt, day: data.day
+            });
+        })
+    
+      
+    });
 // router.post("/:id", (req, res) => {
 
 
