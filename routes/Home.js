@@ -67,7 +67,13 @@ if (1 > parseInt(pageNum)|| parseInt(pageNum) > 2475) {
 router.post("/next", function (req, res) {
 
     pageNum = (parseInt(pageNum) + 1).toString();
-
+    if(pageNum == 2476){
+        pageNum = 1;
+        
+        res.render("Home/404", {
+            msgerror: "You are in the last page"
+    })
+    }
     console.log(pageNum);
     const url = `https://xkcd.com/${pageNum}/info.0.json`
 
@@ -95,6 +101,13 @@ router.post("/back", function (req, res) {
 
     pageNum = (parseInt(pageNum) - 1).toString();
 
+if(pageNum == 0){
+    pageNum = 1;
+
+    res.render("Home/404", {
+        msgerror: "You are in the first page"
+})
+}
     console.log(pageNum);
     const url = `https://xkcd.com/${pageNum}/info.0.json`
 
