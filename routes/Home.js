@@ -22,22 +22,9 @@ var string = "";
 const url = `https://xkcd.com/info.0.json`;
 
 router.get("/", (req, res) => {
-    let jsdom = require('jsdom').JSDOM,
- 
-// some hard coded html
-html = `\t\thhhh\n\dfffdf
-yyy\thh`;
- 
-// get the dom by calling the jsdom constructor, and giving it the html
-dom = new jsdom(html),
- 
-// get the window object @ dom.window
-window = dom.window,
+
  
 
-
-//     const dom = new JSDOM(res.body);
-//   console.log(dom.window.document.transcript.innerHTML = 'First line\nSecond line\nThird line');
 
 string = (req.app.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, ''); 
     res.render("Home/home", {
@@ -115,6 +102,32 @@ router.post("/back", function (req, res) {
 
     console.log(pageNum);
     const url = `https://xkcd.com/${pageNum}/info.0.json`
+
+
+    console.log(url);
+
+
+    request(url, function (error, response, body) {
+        const data = JSON.parse(body);
+        console.log(data);
+
+   
+        string = (data.transcript).replace(/[\])}[{(]/g, '').replace(/[\])}[{(]/g, ''); 
+
+        res.render("Home/home", {
+            title: data.title, img: data.img, month: data.month,
+            num: data.num, year: data.year
+            , alt: data.alt, day: data.day, transcript: string
+        });
+    })
+
+
+});
+
+router.post("/backMain", function (req, res) {
+
+ 
+    const url = `https://xkcd.com/1/info.0.json`
 
 
     console.log(url);
